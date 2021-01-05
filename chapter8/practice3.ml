@@ -70,3 +70,32 @@ let test1 = otomeza lst1 = []
 let test2 = otomeza lst2 = ["hanako"]
 let test3 = otomeza lst3 = ["hanako"]
 let test4 = otomeza lst4 = ["hanako"; "tarou"]
+
+(* person_t型のリストとperson_t型のレコードを受け取ったら,　名前の順になるような位置にレコードを挿入したリストを返す *)
+(* insert_person : person_t list -> person_t -> person_t list *)
+let rec insert_person lst person = match lst with
+    [] -> [person]
+  | ({name = a; height = b; weight = c; birthday = d; bloodtype = e} as first) :: rest ->
+    (match person with
+       {name = g; height = h; weight = i; birthday = j; bloodtype = k} 
+       -> 
+       if g < a then person :: lst
+       else first :: insert_person rest person)
+
+(* person_t型のリストを受け取ったら,　それを名前の順に整列したリストを返す *)
+(* person_sort : person_t list -> person_t list *)
+let rec person_sort lst = match lst with
+    [] -> []
+  | first :: rest (* person_sort rest *)
+    -> insert_person  (person_sort rest) first
+(* リストの例 *)
+let lst10 = []
+let lst11 = [data1]
+let lst12 = [data1; data2]
+let lst13 = [data1; data2; data3]
+
+(* test *)
+let test10 = person_sort lst10 = []
+let test11 = person_sort lst11 = [data1]
+let test12 = person_sort lst12 = [data2; data1]
+let test13 = person_sort lst13 = [data2; data1; data3]
