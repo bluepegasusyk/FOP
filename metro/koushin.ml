@@ -15,9 +15,10 @@ in List.map f v *)
 
 (* 上の関数について, koushin1を定義せずに書き直す *)
 (* リストの中の全要素について同じ処理を行うためmapを使う *)
-let koushin {namae = p_name; saitan_kyori = p_kyori; temae_list = p_temae} lst_v = 
+(* 16.3 引数を一つ増やし，駅間のリスト（ekikan_t list)を受け取るようにする *)
+let koushin {namae = p_name; saitan_kyori = p_kyori; temae_list = p_temae} lst_v ekikan_lst = 
   List.map (fun ({namae = q_name; saitan_kyori = q_kyori; temae_list = q_list} as q) ->
-      let kyori = get_ekikan_kyori p_name q_name global_ekikan_list
+      let kyori = get_ekikan_kyori p_name q_name ekikan_lst
       in if kyori = infinity then q
       else if p_kyori +. kyori > q_kyori then q
       else {namae = q_name; saitan_kyori = p_kyori +. kyori; temae_list = q_name :: p_temae}) lst_v
@@ -33,7 +34,7 @@ let eki4 = {namae="後楽園"; saitan_kyori = infinity; temae_list = []}
 let lst = [eki1; eki2; eki3; eki4] 
  
 (* テスト *) 
-let test1 = koushin eki2 [] = [] 
-let test2 = koushin eki2 lst = 
+let test1 = koushin eki2 [] global_ekikan_list = [] 
+let test2 = koushin eki2 lst global_ekikan_list = 
  [{namae="池袋"; saitan_kyori = 3.0; temae_list = ["池袋"; "新大塚"; "茗荷谷"]}; 
   eki2; eki3; eki4]
