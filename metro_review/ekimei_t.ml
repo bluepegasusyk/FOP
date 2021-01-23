@@ -6,4 +6,3 @@ type ekimei_t = {
   shozoku : string; (* 所属する路線 *)
 }
 
-
