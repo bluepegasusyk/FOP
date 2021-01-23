@@ -11,3 +11,4 @@ let rec romaji_to_kanji ekimei_r lst = match lst with
 
 (* test *)
 let test1 = romaji_to_kanji "myogadani" global_ekimei_list
+let test2 = romaji_to_kanji "sapporo" global_ekimei_list

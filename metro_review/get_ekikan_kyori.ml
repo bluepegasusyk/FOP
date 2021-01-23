@@ -12,4 +12,5 @@ let rec get_ekikan_kyori siten shuten lst = match lst with
 
 (* test *)
 let test1 = get_ekikan_kyori "茗荷谷" "新大塚" global_ekikan_list = 1.2
-let test2 = get_ekikan_kyori "茗荷谷" "赤坂見附" global_ekikan_list 
+let test2 = get_ekikan_kyori "茗荷谷" "赤坂見附" global_ekikan_list = infinity
+let test3 = get_ekikan_kyori "新大塚" "茗荷谷" global_ekikan_list = 1.2
